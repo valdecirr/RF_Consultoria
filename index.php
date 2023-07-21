@@ -1,17 +1,35 @@
 <?php
 if (isset($_POST['submit'])) {
-    print_r($_POST['Nome']);
-    print_r($_POST['Dias']);
-    // $Nome = $_POST['Nome'];
-    // $Dias = $_POST['Dias'];
-    // $Inicio = $_POST['Inicio'];
-    // $CheckInicio = $_POST['CheckInicio'];
-    // $InicioReal = $_POST['InicioReal'];
-    // $Termino = $_POST['Termino'];
-    // $CheckFinal = $_POST['CheckFinal'];
-    // $FinalReal = $_POST['FinalReal'];
-    // $Status = $_POST['Status'];
-    // $OBS = $_POST['OBS'];
+    include_once('config.php');
+
+    // $valueCheckInicial = isset($_POST['CheckInicio']) ? 'X' : '';
+    // $valueCheckFinal = isset($_POST['CheckFinal']) ? 'X' : '';
+
+
+    $nome = $_POST['nome'];
+    $dias = $_POST['dias'];
+    $datainicio = $_POST['datainicio'];
+    $checkinicio = $_POST['checkinicio'];
+    $inicioreal = $_POST['inicioreal'];
+    $termino = $_POST['termino'];
+    $checkfinal = $_POST['checkfinal'];
+    $finalreal = $_POST['finalreal'];
+    $situacao = $_POST['situacao'];
+    $obs = $_POST['obs'];
+
+    $sql = "INSERT INTO rf_consultoria (nome, dias, datainicio, checkinicio, inicioreal, termino, checkfinal, finalreal, situacao, obs) VALUES ('$nome', '$dias', '$datainicio', '$checkinicio', '$inicioreal', '$termino', '$checkfinal', '$finalreal', '$situacao', '$obs')";
+    $result = mysqli_query($conexao, $sql);
+
+
+
+
+   // if ($result) {
+    //     echo "Os dados foram inseridos com sucesso!";
+    // } else {
+    //     echo "Ocorreu um erro ao inserir os dados: " . mysqli_error($conn);
+    // }
+    
+    header("Location: index.php");
 }
 
 
@@ -25,7 +43,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-    <link type="text/css" rel="stylesheet" href="css/EstiloEntrada.css">
+    <!-- <link type="text/css" rel="stylesheet" href="css/EstiloEntrada.css"> -->
     <title>Formulário</title>
     <style>
         body {
@@ -91,15 +109,15 @@ if (isset($_POST['submit'])) {
             font-size: 12px;
         }
 
-        #Inicio,
-        #InicioReal,
-        #Termino,
-        #FinalReal {
+        #datainicio,
+        #inicioreal,
+        #termino,
+        #finalreal {
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
-            padding: 8px;
+            padding: 4px;
             margin: 5px;
             cursor: pointer;
             border-radius: 10px;
@@ -125,58 +143,58 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="box">
-        <form action="Entrada.php" method="POST">
+        <form action="index.php" method="POST">
             <fieldset>
                 <legend><b>Dados de Entrada</b></legend>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Nome" class="inputUser" value="">
+                    <input type="text" name="nome" id="Nome" class="inputUser" value="">
                     <label for="Nome" class="labelInput">Nome</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Dias" class="inputUser" value="">
-                    <label for="Dias" class="labelInput">Dias</label>
+                    <input type="text" name="dias" id="dias" class="inputUser" value="">
+                    <label for="dias" class="labelInput">Dias</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="Inicio" class="">Inicio</label>
-                    <input type="date" name="Inicio" id="Inicio" class="" value="">
+                    <label for="datainicio" class="">Inicio</label>
+                    <input type="date" name="datainicio" id="datainicio" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="CheckInicio" class="">CheckInicio</label>
-                    <input type="checkbox" name="CheckInicio" class="" value="">
+                    <label for="checkinicio" class="">Check Início</label>
+                    <input type="checkbox" name="checkinicio" id="checkinicio" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="InicioReal" class="">InicioReal</label>
-                    <input type="date" name="InicioReal" id="InicioReal" class="" value="">
+                    <label for="inicioreal" class="">Inicio Real</label>
+                    <input type="date" name="inicioreal" id="inicioreal" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="Termino" class="">Término</label>
-                    <input type="date" name="Termino" id="Termino" class="" value="">
+                    <label for="termino" class="">Término</label>
+                    <input type="date" name="termino" id="termino" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="CheckFinal" class="">CheckFinal</label>
-                    <input type="checkbox" name="CheckFinal" class="" value="">
+                    <label for="checkfinal" class="">Check Final</label>
+                    <input type="checkbox" name="checkfinal" id="checkfinal" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <label for="FinalReal" class="">FinalReal</label>
-                    <input type="date" name="FinalReal" id="FinalReal" class="" value="">
+                    <label for="finalreal" class="">Final Real</label>
+                    <input type="date" name="finalreal" id="finalreal" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Status" class="inputUser" value="">
-                    <label for="Status" class="labelInput">Status</label>
+                    <input type="text" name="situacao" id="situacao" class="inputUser" value="">
+                    <label for="situacao" class="labelInput">Status</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="OBS" class="inputUser" value="">
-                    <label for="OBS" class="labelInput">OBS</label>
+                    <input type="text" name="obs" id="obs" class="inputUser" value="">
+                    <label for="obs" class="labelInput">OBS</label>
                 </div>
                 <br>
                 <input type="submit" name="submit" id="submit">
