@@ -1,17 +1,29 @@
 <?php
 if (isset($_POST['submit'])) {
-    print_r($_POST['Nome']);
-    print_r($_POST['Dias']);
-    // $Nome = $_POST['Nome'];
-    // $Dias = $_POST['Dias'];
-    // $Inicio = $_POST['Inicio'];
-    // $CheckInicio = $_POST['CheckInicio'];
-    // $InicioReal = $_POST['InicioReal'];
-    // $Termino = $_POST['Termino'];
-    // $CheckFinal = $_POST['CheckFinal'];
-    // $FinalReal = $_POST['FinalReal'];
-    // $Status = $_POST['Status'];
+    include_once('config.php');
+
+    // $valueCheckInicial = isset($_POST['CheckInicio']) ? 'X' : '';
+    // $valueCheckFinal = isset($_POST['CheckFinal']) ? 'X' : '';
+
+
+    $nome = $_POST['Nome'];
+    //print_r($nome);
+    $dias = $_POST['Dias'];
+    // $Inicio = date_format(date_create($_POST['Inicio']), 'd/m/Y');
+    // $CheckInicio =  $_POST['CheckInicio'];
+    // $InicioReal = date_format(date_create($_POST['InicioReal']), 'd/m/Y');
+    // $Termino = date_format(date_create($_POST['Termino']), 'd/m/Y');
+    // $CheckFinal =  $_POST['CheckFinal'];
+    // $FinalReal = date_format(date_create($_POST['FinalReal']), 'd/m/Y');
+    // // $Status = $_POST['Status'];
     // $OBS = $_POST['OBS'];
+
+    // $result = mysqli_query($conexao, "INSERT INTO rf_consultoria(Nome,Dias,Inicio,CheckInicio,InicioReal,Termino,CheckFinal,FinalReal,OBS) 
+    // VALUES('$Nome','$Dias','$Inicio','$CheckInicio','$InicioReal','$Termino','$CheckFinal','$FinalReal','$OBS')");
+
+    $result = mysqli_query($conexao, "INSERT INTO rf_consultoria (nome, dias) VALUES ('$nome','$dias')");
+
+    // header("Location: Entrada.php");
 }
 
 
@@ -25,14 +37,12 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-    <link type="text/css" rel="stylesheet" href="css/EstiloEntrada.css">
+    <!-- <link type="text/css" rel="stylesheet" href="css/EstiloEntrada.css"> -->
     <title>Formulário</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
-
-
         }
 
         .box {
@@ -130,12 +140,12 @@ if (isset($_POST['submit'])) {
                 <legend><b>Dados de Entrada</b></legend>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Nome" class="inputUser" value="">
+                    <input type="text" name="Nome" id="Nome" class="inputUser" value="">
                     <label for="Nome" class="labelInput">Nome</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Dias" class="inputUser" value="">
+                    <input type="text" name="Dias" id="Dias" class="inputUser" value="">
                     <label for="Dias" class="labelInput">Dias</label>
                 </div>
                 <br>
@@ -146,7 +156,7 @@ if (isset($_POST['submit'])) {
                 <br>
                 <div class="inputBox">
                     <label for="CheckInicio" class="">CheckInicio</label>
-                    <input type="checkbox" name="CheckInicio" class="" value="">
+                    <input type="checkbox" name="CheckInicio" id="CheckInicio" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
@@ -161,7 +171,7 @@ if (isset($_POST['submit'])) {
                 <br>
                 <div class="inputBox">
                     <label for="CheckFinal" class="">CheckFinal</label>
-                    <input type="checkbox" name="CheckFinal" class="" value="">
+                    <input type="checkbox" name="CheckFinal" id="CheckFinal" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
@@ -170,12 +180,12 @@ if (isset($_POST['submit'])) {
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Status" class="inputUser" value="">
+                    <input type="text" name="Status" id="Status" class="inputUser" value="">
                     <label for="Status" class="labelInput">Status</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="OBS" class="inputUser" value="">
+                    <input type="text" name="OBS" id="OBS" class="inputUser" value="">
                     <label for="OBS" class="labelInput">OBS</label>
                 </div>
                 <br>

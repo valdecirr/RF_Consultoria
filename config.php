@@ -1,11 +1,12 @@
 <?php
 
-$dbHost = 'Localhost';
+$dbHost = 'localhost';
 $dbUsername = 'root';
 $dbPassword = 'root';
-$dbName = 'csv_db 5';
+$dbName = 'rfconsultoria';
 
-$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+$conexao = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
+
 
 // if ($conexao->connect_error) {
 //     die("Conexão falhou: " . $conexao->connect_error);
