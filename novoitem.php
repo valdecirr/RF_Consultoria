@@ -1,23 +1,31 @@
 <?php
-// if (isset($_POST['submit'])) {
-include_once('config.php');
-$resultID = $_GET['id'];
+if (isset($_POST['submit'])) {
+    include_once('config.php');
 
-$result = mysqli_query($conexao, "SELECT* FROM rf_consultoria  WHERE id = '$resultID'");
+    // $valueCheckInicial = isset($_POST['CheckInicio']) ? 'X' : '';
+    // $valueCheckFinal = isset($_POST['CheckFinal']) ? 'X' : '';
 
-while ($row = mysqli_fetch_array($result)) {
-    $rID = $row['id'];
-    $nome = $row['nome'];
-    $dias = $row['dias'];
-    $inicio = date_format(date_create($row['datainicio']), 'Y-m-d');
-    $checkinicio = $row['checkinicio'];
-    $inicioreal = date_format(date_create($row['inicioreal']), 'Y-m-d');
-    $checkfinal = $row['checkfinal'];
-    $finalreal = date_format(date_create($row['finalreal']), 'Y-m-d');
-    $status = $row['situacao'];
-    $obs = $row['obs'];
-    $empresa = $row['empresa'];
+
+    // $nome = $_POST['Nome'];
+    //print_r($nome);
+    // $dias = $_POST['Dias'];
+    // $Inicio = date_format(date_create($_POST['Inicio']), 'd/m/Y');
+    // $CheckInicio =  $_POST['CheckInicio'];
+    // $InicioReal = date_format(date_create($_POST['InicioReal']), 'd/m/Y');
+    // $Termino = date_format(date_create($_POST['Termino']), 'd/m/Y');
+    // $CheckFinal =  $_POST['CheckFinal'];
+    // $FinalReal = date_format(date_create($_POST['FinalReal']), 'd/m/Y');
+    // // $Status = $_POST['Status'];
+    // $OBS = $_POST['OBS'];
+
+    // $result = mysqli_query($conexao, "INSERT INTO rf_consultoria(Nome,Dias,Inicio,CheckInicio,InicioReal,Termino,CheckFinal,FinalReal,OBS) 
+    // VALUES('$Nome','$Dias','$Inicio','$CheckInicio','$InicioReal','$Termino','$CheckFinal','$FinalReal','$OBS')");
+
+    $result = mysqli_query($conexao, "INSERT INTO rf_consultoria (nome, dias) VALUES ('$nome','$dias')");
+
+    // header("Location: Entrada.php");
 }
+
 
 ?>
 
@@ -107,8 +115,7 @@ while ($row = mysqli_fetch_array($result)) {
             border-radius: 10px;
         }
 
-        #submit,
-        #return {
+        #submit {
             background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
             border: none;
             outline: none;
@@ -116,94 +123,73 @@ while ($row = mysqli_fetch_array($result)) {
             padding: 10px;
             cursor: pointer;
             border-radius: 10px;
-            width: 50%;
+            width: 100%;
             cursor: pointer;
-            float: right;
         }
 
         #submit:hover {
             background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80, 19, 195));
         }
-
-        #return:hover {
-            background-image: linear-gradient(to right, rgb(200, 180, 72), rgb(150, 119, 95));
-        }
-       
     </style>
 </head>
 
 <body>
     <div class="box">
-        <form action="atualizaritem.php?id=<? echo ($rID) ?>;<? echo ($empresa) ?>" method="POST">
+        <form action="Entrada.php" method="POST">
             <fieldset>
                 <legend><b>Dados de Entrada</b></legend>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Nome" id="Nome" class="inputUser" value="<? echo ($nome) ?>">
+                    <input type="text" name="Nome" id="Nome" class="inputUser" value="">
                     <label for="Nome" class="labelInput">Nome</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Dias" id="Dias" class="inputUser" value="<? echo ($dias) ?>">
+                    <input type="text" name="Dias" id="Dias" class="inputUser" value="">
                     <label for="Dias" class="labelInput">Dias</label>
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="Inicio" class="">Inicio</label>
-                    <input type="date" name="Inicio" id="Inicio" class="" value="<? echo ($inicio) ?>">
+                    <input type="date" name="Inicio" id="Inicio" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="CheckInicio" class="">CheckInicio</label>
-                    <?php
-                    if ($checkinicio != "") {
-                        echo ('<input type="checkbox" name="CheckInicio" id="CheckInicio" class="" checked >');
-                    } else {
-                        echo ('<input type="checkbox" name="CheckInicio" id="CheckInicio" class="" >');
-                    }
-                    ?>
-
+                    <input type="checkbox" name="CheckInicio" id="CheckInicio" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="InicioReal" class="">InicioReal</label>
-                    <input type="date" name="InicioReal" id="InicioReal" class="" value="<? echo ($inicioreal) ?>">
+                    <input type="date" name="InicioReal" id="InicioReal" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="Termino" class="">Término</label>
-                    <input type="date" name="Termino" id="Termino" disabled value="<?php echo (date('Y-m-d', strtotime($inicio . ' + ' . $dias . 'days'))) ?>">
+                    <input type="date" name="Termino" id="Termino" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="CheckFinal" class="">CheckFinal</label>
-                    <?php
-                    if ($checkfinal != "") {
-                        echo ('<input type="checkbox" name="CheckFinal" id="CheckFinal" class="" checked >');
-                    } else {
-                        echo ('<input type="checkbox" name="CheckFinal" id="CheckFinal" class="" >');
-                    }
-                    // <input type="checkbox" name="CheckFinal" id="CheckFinal" class="">
-                    ?>
+                    <input type="checkbox" name="CheckFinal" id="CheckFinal" class="" value="X">
                 </div>
                 <br>
                 <div class="inputBox">
                     <label for="FinalReal" class="">FinalReal</label>
-                    <input type="date" name="FinalReal" id="FinalReal" class="" value="<? echo ($finalreal) ?>">
+                    <input type="date" name="FinalReal" id="FinalReal" class="" value="">
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="Status" id="Status" class="inputUser" value="<? echo ($status) ?>">
+                    <input type="text" name="Status" id="Status" class="inputUser" value="">
                     <label for="Status" class="labelInput">Status</label>
                 </div>
                 <br>
                 <div class="inputBox">
-                    <input type="text" name="OBS" id="OBS" class="inputUser" value="<? echo ($obs) ?>">
+                    <input type="text" name="OBS" id="OBS" class="inputUser" value="">
                     <label for="OBS" class="labelInput">OBS</label>
                 </div>
                 <br>
                 <input type="submit" name="submit" id="submit">
-                <a href="tabelaprincipal.php?empresa=<? echo ($empresa) ?>"><input type="button" name="return" id="return" value="Voltar"></a>
             </fieldset>
         </form>
     </div>

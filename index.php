@@ -1,14 +1,15 @@
 <?php
 if (isset($_POST['submit'])) {
     include_once('config.php');
-
+    $resultID = $_GET['id'];
+    echo $resultID;
     // $valueCheckInicial = isset($_POST['CheckInicio']) ? 'X' : '';
     // $valueCheckFinal = isset($_POST['CheckFinal']) ? 'X' : '';
 
 
-    $nome = $_POST['Nome'];
+    // $nome = $_POST['Nome'];
     //print_r($nome);
-    $dias = $_POST['Dias'];
+    // $dias = $_POST['Dias'];
     // $Inicio = date_format(date_create($_POST['Inicio']), 'd/m/Y');
     // $CheckInicio =  $_POST['CheckInicio'];
     // $InicioReal = date_format(date_create($_POST['InicioReal']), 'd/m/Y');
@@ -21,9 +22,10 @@ if (isset($_POST['submit'])) {
     // $result = mysqli_query($conexao, "INSERT INTO rf_consultoria(Nome,Dias,Inicio,CheckInicio,InicioReal,Termino,CheckFinal,FinalReal,OBS) 
     // VALUES('$Nome','$Dias','$Inicio','$CheckInicio','$InicioReal','$Termino','$CheckFinal','$FinalReal','$OBS')");
 
-    $result = mysqli_query($conexao, "INSERT INTO rf_consultoria (nome, dias) VALUES ('$nome','$dias')");
+    $result = mysqli_query($conexao, "INSERT INTO rf_consultoria where id = '$resultID' ");
 
     // header("Location: Entrada.php");
+    echo $result;
 }
 
 
