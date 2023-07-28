@@ -138,6 +138,14 @@ include_once("config.php");
 
                                 $resultdata = date('d/m/Y', strtotime($row['datainicio'] . ' + ' . $row['dias'] . 'days'));
 
+                                if(strlen($row['finalreal']) == 0) {
+                                    $resultdatafinal = '';
+                                } else {                                   
+                                    // $resultdatafinal = date_format(date_create($row['finalreal']), "d/m/Y");
+                                    $resultdatafinal = explode( '-',$row['finalreal']);
+                                    $resultdatafinal = $resultdatafinal[2].'/'.$resultdatafinal[1].'/'.$resultdatafinal[0];
+                                };
+
                                 echo "<tr style='background-color: $corlinha;'>";
                                 echo "<td>
                                 <a href='editaritem.php?id={$row['id']}'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pen-fill' viewBox='0 0 16 16'>
@@ -154,7 +162,7 @@ include_once("config.php");
                                 echo "<td>" . date_format(date_create($row['inicioreal']), "d/m/Y") . "</td>";
                                 echo "<td>" . $resultdata .  "</td>";
                                 echo "<td>" . $row['checkfinal'] . "</td>";
-                                echo "<td>" . date_format(date_create($row['finalreal']), "d/m/Y") . "</td>";
+                                echo "<td>" . $resultdatafinal . "</td>";
                                 echo "<td>" . $row['situacao'] . "</td>";
                                 echo "<td>" . $row['obs'] . "</td>";
                                 echo "</tr>";

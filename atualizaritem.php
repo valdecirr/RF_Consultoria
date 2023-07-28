@@ -14,7 +14,17 @@ if(isset($_POST['CheckInicio'])){
     $checkinicio = "";
 }
 $inicioreal = $_POST['InicioReal'];
-$finalreal = $_POST['FinalReal'];
+
+$finalreal = strlen($_POST['FinalReal']);
+ echo $finalreal;
+if($finalreal == 0 ){
+    $finalreal=NULL;    
+}else{
+    $finalreal = $_POST['FinalReal'];  
+};
+
+echo $finalreal;
+
 if(isset($_POST['CheckFinal'])){
     $checkfinal = "X";
 }else{

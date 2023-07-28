@@ -6,6 +6,19 @@ $resultID = $_GET['id'];
 $result = mysqli_query($conexao, "SELECT* FROM rf_consultoria  WHERE id = '$resultID'");
 
 while ($row = mysqli_fetch_array($result)) {
+
+    if(strlen($row['finalreal']) == 0) {
+        $resultdatafinal = '';
+        echo $resultdatafinal;
+    } else {                                   
+        //$resultdatafinal = date_format(date_create($row['finalreal']), 'Y-m-d');
+        //$resultdatafinal = substr($row['finalreal'],0,4).'-'.substr($row['finalreal'],5,2).'-'.substr($row['finalreal'],8,2);
+        $resultdatafinal = explode('-',$row['finalreal']);
+        $resultdatafinal = $resultdatafinal[0].'-'.$resultdatafinal[1].'-'.$resultdatafinal[2];
+        echo $resultdatafinal;
+        // $resultdatafinal = $resultdatafinal->format('Y-m-d');
+    };
+
     $rID = $row['id'];
     $nome = $row['nome'];
     $dias = $row['dias'];
@@ -13,7 +26,7 @@ while ($row = mysqli_fetch_array($result)) {
     $checkinicio = $row['checkinicio'];
     $inicioreal = date_format(date_create($row['inicioreal']), 'Y-m-d');
     $checkfinal = $row['checkfinal'];
-    $finalreal = date_format(date_create($row['finalreal']), 'Y-m-d');
+    $finalreal =  $resultdatafinal;
     $status = $row['situacao'];
     $obs = $row['obs'];
     $empresa = $row['empresa'];
