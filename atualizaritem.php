@@ -18,7 +18,7 @@ $inicioreal = $_POST['InicioReal'];
 $finalreal = strlen($_POST['FinalReal']);
  echo $finalreal;
 if($finalreal == 0 ){
-    $finalreal=NULL;    
+    $finalreal='NULL';    
 }else{
     $finalreal = $_POST['FinalReal'];  
 };
@@ -33,7 +33,7 @@ if(isset($_POST['CheckFinal'])){
 $status = $_POST['Status'];
 $obs = $_POST['OBS'];
 
-$result = mysqli_query($conexao, "UPDATE rf_consultoria SET nome='$nome', dias='$dias', datainicio='$inicio', checkinicio='$checkinicio', inicioreal='$inicioreal', finalreal='$finalreal', checkfinal='$checkfinal', situacao='$status', obs='$obs' , empresa='$empresa' WHERE id='$resultID'");  
+// $result = mysqli_query($conexao, "UPDATE rf_consultoria SET nome='$nome', dias='$dias', datainicio='$inicio', checkinicio='$checkinicio', inicioreal='$inicioreal', finalreal='$finalreal', checkfinal='$checkfinal', situacao='$status', obs='$obs' , empresa='$empresa' WHERE id='$resultID'");  
 
-header("Location: tabelaprincipal.php?empresa={$empresa}");
+// header("Location: tabelaprincipal.php?empresa={$empresa}");
 ?>

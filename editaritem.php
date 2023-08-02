@@ -7,14 +7,14 @@ $result = mysqli_query($conexao, "SELECT* FROM rf_consultoria  WHERE id = '$resu
 
 while ($row = mysqli_fetch_array($result)) {
 
-    if(strlen($row['finalreal']) == 0) {
+    if (strlen($row['finalreal']) == 0) {
         $resultdatafinal = '';
         echo $resultdatafinal;
-    } else {                                   
+    } else {
         //$resultdatafinal = date_format(date_create($row['finalreal']), 'Y-m-d');
         //$resultdatafinal = substr($row['finalreal'],0,4).'-'.substr($row['finalreal'],5,2).'-'.substr($row['finalreal'],8,2);
-        $resultdatafinal = explode('-',$row['finalreal']);
-        $resultdatafinal = $resultdatafinal[0].'-'.$resultdatafinal[1].'-'.$resultdatafinal[2];
+        $resultdatafinal = explode('-', $row['finalreal']);
+        $resultdatafinal = $resultdatafinal[0] . '-' . $resultdatafinal[1] . '-' . $resultdatafinal[2];
         echo $resultdatafinal;
         // $resultdatafinal = $resultdatafinal->format('Y-m-d');
     };
@@ -41,108 +41,10 @@ while ($row = mysqli_fetch_array($result)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-    <!-- <link type="text/css" rel="stylesheet" href="css/EstiloEntrada.css"> -->
+    <link href="/jquery-ui.min.css">
+    <link href="/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/estiloEditarItem.css">
     <title>Formulário</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
-        }
-
-        .box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            border-radius: 10px;
-            width: 40%;
-            color: white;
-        }
-
-        fieldset {
-            border: 3px solid dodgerblue;
-        }
-
-        legend {
-            border: 1px solid dodgerblue;
-            padding: 10px;
-            text-align: center;
-            background-color: dodgerblue;
-            border-radius: 8px;
-
-        }
-
-        .inputBox {
-            position: relative;
-        }
-
-        .inputUser {
-            background: none;
-            border: none;
-            border-bottom: 1px solid white;
-            outline: none;
-            color: white;
-            font-size: 15px;
-            width: 100%;
-            /* letter-spacing: 2px; */
-        }
-
-        .labelInput {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .inputUser:focus~.labelInput,
-        .inputUser:valid~.labelInput {
-            top: -15px;
-            left: 0px;
-            color: dodgerblue;
-            font-size: 12px;
-        }
-
-        #Inicio,
-        #InicioReal,
-        #Termino,
-        #FinalReal {
-            background-color: dodgerblue;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 8px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-
-        #submit,
-        #return {
-            background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
-            border: none;
-            outline: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-            width: 50%;
-            cursor: pointer;
-            float: right;
-        }
-
-        #submit:hover {
-            background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80, 19, 195));
-        }
-
-        #return:hover {
-            background-image: linear-gradient(to right, rgb(200, 180, 72), rgb(150, 119, 95));
-        }
-       
-    </style>
 </head>
 
 <body>
@@ -202,7 +104,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <br>
                 <div class="inputBox">
                     <label for="FinalReal" class="">FinalReal</label>
-                    <input type="date" name="FinalReal" id="FinalReal" class="" value="<? echo ($finalreal) ?>">
+                    <input type="date" name="FinalReal" id="FinalReal" onchange="ObterValor(this.value)" value="<? echo ($finalreal) ?>"/>
                 </div>
                 <br>
                 <div class="inputBox">
@@ -220,7 +122,11 @@ while ($row = mysqli_fetch_array($result)) {
             </fieldset>
         </form>
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>  -->
+    <script type="text/javascript" src="/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="/jquery-ui.js"></script>
+    <script type="text/javascript" src="/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascript.js"></script>
+
 </body>
 
 </html>
